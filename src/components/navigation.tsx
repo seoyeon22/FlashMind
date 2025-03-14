@@ -22,23 +22,31 @@ export default function Navigation(){
   if (!isMounted) return null;
 
   return (
-    <nav>
-      <ul>
-        <li>
-          <button onClick={() => router.push(isLoggedIn ? "/dashboard" : "/")}>
+    <nav className="bg-blue-500 text-white">
+      <ul className="flex flex-column">
+        <li className="mr-auto content-center">
+          <button
+          className="text-2xl p-1"
+          onClick={() => router.push(isLoggedIn ? "/dashboard" : "/")}>
             FlashMind
           </button>
         </li>
-        <li>
+        <li className="m-1 p-1">
           {isLoggedIn ? (
-            <button onClick={() => {logout(); router.push("/");}}>Log out</button>
+            <button 
+            className="bg-blue-400 p-1 rounded-sm"
+            onClick={() => {logout(); router.push("/");}}>Log out</button>
           ) : (
-            <button onClick={() => router.push("/auth/login")}>Log in</button>
+            <button 
+            className="bg-blue-400 p-1 rounded-sm"
+            onClick={() => router.push("/auth/login")}>Log in</button>
           )}
         </li>
         {!isLoggedIn && (
-          <li>
-            <button onClick={() => router.push("/auth/signup")}>Sign up</button>
+          <li className="m-1 p-1">
+            <button 
+            className="bg-blue-400 p-1 rounded-sm"
+            onClick={() => router.push("/auth/signup")}>Sign up</button>
           </li>
         )}
       </ul>

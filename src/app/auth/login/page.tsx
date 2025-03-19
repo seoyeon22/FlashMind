@@ -1,6 +1,33 @@
-import { handleLogin } from "@/services/authService"
+"use client";
+
+import { login } from "@/services/authService"
+import { useAuthStore } from "@/stores/authStore";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function LogIn() {
+  const { error, setError, login: setLogin } = useAuthStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    setError(null);
+  }, []);
+
+  const handleLogin = async (formData: FormData) => {
+    setError(null);  
+    try {
+      const email = formData.get('email') as string;
+      const password = formData.get('password') as string;
+      const userId = await login(email, password);
+      setLogin(userId);
+      router.push("/dashboard");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "로그인 실패");
+    } finally {
+      
+    }
+  }
+
     return (
       <div className="flex justify-center items-center h-screen">
         <form className="bg-white p-6 rounded-lg shadow-md w-96 flex flex-col gap-4">
@@ -31,7 +58,7 @@ export default function LogIn() {
               className="border border-gray-300 rounded-md p-2 focus:ring-1 focus:ring-blue-500 w-full"
             />
           </div>
-
+          {error && <p className="text-red-500">{error}</p>}
           {/* 로그인 버튼 */}
           <button
             formAction={handleLogin}

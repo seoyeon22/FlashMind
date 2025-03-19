@@ -2,17 +2,21 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 export interface AuthState {
-    isLoggedIn: boolean
-    login: () => void
+    userId: string | null;
+    error: string | null;
+    login: (id: string) => void
     logout: () => void
+    setError: (error: string | null) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
     persist(
         (set) => ({
-            isLoggedIn: false,
-            login: () => set({ isLoggedIn: true }),
-            logout: () => set({ isLoggedIn: false })
+            userId: null,
+            error: null,
+            login: (userId) => set({ userId, error: null }),
+            logout: () => set({ userId: null }),
+            setError: (error) => set({ error }),
         }),
         {
             name: 'auth-storage'

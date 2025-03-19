@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Navigation(){
-  const { isLoggedIn, logout } = useAuthStore()
+  const { userId, logout } = useAuthStore()
   const router = useRouter(); 
   const [isMounted, setIsMounted] = useState(false);
 
@@ -15,9 +15,9 @@ export default function Navigation(){
 
   useEffect(() => {
     if (isMounted) {
-      console.log("logged in :", isLoggedIn);
+      console.log("logged in :", userId);
     }
-  }, [isMounted, isLoggedIn]);
+  }, [isMounted, userId]);
 
   if (!isMounted) return null;
 
@@ -27,12 +27,12 @@ export default function Navigation(){
         <li className="mr-auto content-center">
           <button
           className="text-2xl p-1"
-          onClick={() => router.push(isLoggedIn ? "/dashboard" : "/")}>
+          onClick={() => router.push(userId ? "/dashboard" : "/")}>
             FlashMind
           </button>
         </li>
         <li className="m-1 p-1">
-          {isLoggedIn ? (
+          {userId ? (
             <button 
             className="bg-blue-400 p-1 rounded-sm"
             onClick={() => {logout(); router.push("/");}}>Log out</button>
@@ -42,7 +42,7 @@ export default function Navigation(){
             onClick={() => router.push("/auth/login")}>Log in</button>
           )}
         </li>
-        {!isLoggedIn && (
+        {!userId && (
           <li className="m-1 p-1">
             <button 
             className="bg-blue-400 p-1 rounded-sm"

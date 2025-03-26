@@ -15,19 +15,20 @@ export default function LogIn() {
 
   const handleLogin = async (formData: FormData) => {
     setErrorMessage(null);
+    
     try {
       const email = formData.get('email') as string;
       const password = formData.get('password') as string;
       const { error } = await authService.signIn(email, password);
+      console.log("here");
       if(error) {
         setErrorMessage(error.message);
-        return;
-      }      
+      }
     } catch (e) {
       throw new Error("로그인 오류");
     }
     router.push("/dashboard");
-  }
+  };
 
     return (
       <div className="flex justify-center items-center h-screen">

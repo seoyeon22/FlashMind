@@ -1,4 +1,25 @@
-import { handleSignup } from "@/services/authService"
+import { authService } from "@/services/authService";
+import { redirect } from "next/navigation";
+
+async function handleSignUp(formData: FormData) {
+  "use server"; // 서버 액션 활성화
+
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+  
+  try {
+      const { userId, error } = await authService.signUp(email, password);
+
+      if (error) {
+          console.error("Sign-up error:", error);
+          return;
+      }
+
+      redirect("/dashboard"); // 서버에서 직접 리다이렉트
+  } catch (error) {
+      console.error("Unexpected error:", error);
+  }
+}
 
 export default function SignUp(){
     return (
@@ -34,7 +55,7 @@ export default function SignUp(){
 
           {/* 회원가입 버튼 */}
           <button
-            formAction={handleSignup}
+            formAction={handleSignUp}
             type="submit"
             className="bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors w-full"
           >

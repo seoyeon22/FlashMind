@@ -1,31 +1,32 @@
 "use client";
 
-import { login } from "@/services/authService"
+import { authService } from "@/services/authService"
 import { useAuthStore } from "@/stores/authStore";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function LogIn() {
-  const { error, setError, login: setLogin } = useAuthStore();
   const router = useRouter();
+  const { errorMessage, setErrorMessage } = useAuthStore();
 
   useEffect(() => {
-    setError(null);
+    setErrorMessage(null);
   }, []);
 
   const handleLogin = async (formData: FormData) => {
-    setError(null);  
+    setErrorMessage(null);
     try {
       const email = formData.get('email') as string;
       const password = formData.get('password') as string;
-      const userId = await login(email, password);
-      setLogin(userId);
-      router.push("/dashboard");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "로그인 실패");
-    } finally {
-      
+      const { error } = await authService.signIn(email, password);
+      if(error) {
+        setErrorMessage(error.message);
+        return;
+      }      
+    } catch (e) {
+      throw new Error("로그인 오류");
     }
+    router.push("/dashboard");
   }
 
     return (
@@ -58,7 +59,7 @@ export default function LogIn() {
               className="border border-gray-300 rounded-md p-2 focus:ring-1 focus:ring-blue-500 w-full"
             />
           </div>
-          {error && <p className="text-red-500">{error}</p>}
+          {errorMessage && <p className="text-red-500">{errorMessage}</p>}
           {/* 로그인 버튼 */}
           <button
             formAction={handleLogin}

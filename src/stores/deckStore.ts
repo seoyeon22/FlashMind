@@ -4,13 +4,13 @@ import { getDecks } from "@/services/deckService";
 
 interface DeckState {
     decks: any[];
-    setDecks: (decks: any[]) => void;
+    addDeck: (deck: any) => void;
     loadDecks: () => void;
 }
 
 export const useDeckStore = create<DeckState>((set) => ({
     decks: [],
-    setDecks: (decks) => set({ decks }),
+    addDeck: (deck) => set((state) => ({ decks: [...state.decks, deck]})),
     loadDecks: async () => {
         const { user } = useAuthStore.getState();
         if(user) {

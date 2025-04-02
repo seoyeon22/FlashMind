@@ -19,8 +19,8 @@ export default function LogIn() {
     try {
       const email = formData.get('email') as string;
       const password = formData.get('password') as string;
-      const { error } = await authService.signIn(email, password);
-      console.log("here");
+      const { userId, error } = await authService.signIn(email, password);
+      console.log(userId);
       if(error) {
         setErrorMessage(error.message);
       }

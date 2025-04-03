@@ -1,5 +1,6 @@
-import { supabase } from "@/utils/supabase/server";
+import { createClient } from "@/app/utils/supabase/client";
 
+const supabase = await createClient();
 
 export async function getCards(deckId: string, userId: string) {
     const { data, error } = await supabase

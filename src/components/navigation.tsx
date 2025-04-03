@@ -2,9 +2,10 @@
 import { useAuthStore } from "@/stores/authStore";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { authService } from "@/services/authService";
 
 export default function Navigation(){
-  const { user, setUser } = useAuthStore()
+  const { user } = useAuthStore()
   const router = useRouter(); 
   const [isMounted, setIsMounted] = useState(false);
 
@@ -35,7 +36,7 @@ export default function Navigation(){
           {user ? (
             <button 
             className="bg-blue-400 p-1 rounded-sm"
-            onClick={() => {setUser(null); router.push("/");}}>Log out</button>
+            onClick={() => {authService.signOut(); router.push("/");}}>Log out</button>
           ) : (
             <button 
             className="bg-blue-400 p-1 rounded-sm"

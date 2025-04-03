@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { getDecks } from "@/services/deckService";
 import DeckCard from "@/components/deckCard";
@@ -18,7 +17,9 @@ export default function DeckList() {
     // 덱 목록 가져오기
     useEffect(() => {
         const loadDecks = async () => {
-            if (!user) return; // 유저 정보 없으면 실행 안 함
+            if (!user) { // 유저 정보 없으면 실행 안 함
+                return;
+            } 
 
             try {
                 const fetchedDecks = await getDecks(user);

@@ -20,14 +20,16 @@ export default function LogIn() {
       const email = formData.get('email') as string;
       const password = formData.get('password') as string;
       const { userId, error } = await authService.signIn(email, password);
-      console.log(userId);
+
       if(error) {
         setErrorMessage(error.message);
+      }
+      else{
+        router.push("/dashboard");
       }
     } catch (e) {
       throw new Error("로그인 오류");
     }
-    router.push("/dashboard");
   };
 
     return (

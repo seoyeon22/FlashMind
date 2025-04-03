@@ -1,11 +1,12 @@
 "use client"; // 클라이언트 컴포넌트
 
 import { useEffect } from "react";
-import { supabase } from "@/utils/supabase/server";
 import { useAuthStore } from "@/stores/authStore";
 import { authService } from "@/services/authService";
+import { createClient } from "@/app/utils/supabase/client";
 
 export default function AuthListener() {
+  const supabase = createClient();
   const { setUser } = useAuthStore();
 
   useEffect(() => {

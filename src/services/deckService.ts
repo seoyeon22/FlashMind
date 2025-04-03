@@ -1,5 +1,6 @@
-import { useDeckStore } from "@/stores/deckStore";
-import { supabase } from "@/utils/supabase/server"
+import { createClient } from "@/app/utils/supabase/client"
+
+const supabase = await createClient();
 
 export async function getDeck(deckId: string) {
     const { data, error } = await supabase

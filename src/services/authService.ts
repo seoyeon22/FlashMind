@@ -1,7 +1,9 @@
-import { useAuthStore } from "@/stores/authStore";
-import { supabase } from "@/utils/supabase/server";
+import { createClient } from "@/app/utils/supabase/client";
+
+const supabase = await createClient();
 
 export const authService = {
+
   //  public.users 테이블에서 auth_id를 기반으로 users.id 가져오기
   getUserByAuthId: async (authId: string) => {
     const { data, error } = await supabase
@@ -23,7 +25,7 @@ export const authService = {
       { auth_id: authId, username: "username", created_at: new Date() }
     ]).select();
     console.log(data, error);
-
+  
     if(!data){
       return null;
     }    
@@ -35,7 +37,6 @@ export const authService = {
     const { data, error } = await supabase.auth.signUp({ email, password });
 
     if (error) {
-      console.error("Signup error:", error);
       return { userId: null, error };
     }
 
@@ -55,7 +56,6 @@ export const authService = {
     });
 
     if (error) {
-      console.error("Login error:", error.message);
       return { error };
     }
 
@@ -76,22 +76,5 @@ export const authService = {
     if (error) {
       console.error("Logout error:", error.message);
     }
-  },
-
-  listenAuthChanges: () => {
-    const { setUser } = useAuthStore.getState();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-        async (event, session) => {
-            if (event === "SIGNED_OUT") {
-                setUser(null);
-            } else if (session?.user) {
-                const user = await authService.getUserByAuthId(session.user.id);
-                setUser(user);
-            }
-        }
-    );
-
-    return () => subscription.unsubscribe(); // 구독 해제 함수 반환
   },
 };

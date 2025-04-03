@@ -64,7 +64,7 @@ export default function ClientDeckEdit({ params }: { params: Promise<{ deckId: s
         fetchDeckData();
     }, [deckId, user]);
 
-    if (!user) return <p>Loading user...</p>;
+    if (!user) return;
 
     return (
         <div className="p-4">

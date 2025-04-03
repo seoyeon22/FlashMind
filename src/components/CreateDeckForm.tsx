@@ -17,9 +17,8 @@ export default function CreateDeckForm({ onCreate }: { onCreate: (deck: Deck) =>
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
         const deckName = formData.get("deckName") as string;
-
+        
         if(!deckName || !user){
-            console.log("deckName:", deckName);
             return;
         }
 

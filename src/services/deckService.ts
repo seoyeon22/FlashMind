@@ -1,15 +1,20 @@
 import { createClient } from "@/app/utils/supabase/client"
 
-const supabase = await createClient();
+const supabase = createClient();
 
-export async function getDeck(deckId: string) {
+export async function getDeck(deckId: string, userId: string) {
     const { data, error } = await supabase
         .from("decks")
         .select("*")
         .eq("id", deckId)
+        .eq("user_id", userId)
         .single(); 
 
-    if (error) throw error;
+    if (error || !data){
+        alert("해당 덱에 대한 접근 권한이 없습니다.");
+        window.location.href = "/dashboard";
+        return null;
+    }
     return data;
 }
 

@@ -52,7 +52,7 @@ export default function ClientDeckEdit({ params }: { params: Promise<{ deckId: s
         
         const fetchDeckData = async () => {
             try {
-                const deck = await getDeck(deckId);
+                const deck = await getDeck(deckId, user);
                 setDeckName(deck.name); // 덱 이름 설정
                 const fetchedCards = await getCards(deckId, user);
                 setCards(fetchedCards);

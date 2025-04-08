@@ -11,6 +11,7 @@ export default function AuthListener() {
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log("Auth Event:", event);
       if (event === "SIGNED_OUT") {
         setUser(null);
       } else if (session?.user) {
@@ -19,7 +20,7 @@ export default function AuthListener() {
       }
     });
 
-    return () => subscription.unsubscribe(); // ✅ 언마운트 시 해제
+    return () => subscription.unsubscribe(); // 언마운트 시 해제
   }, []);
 
   return null; // UI에는 영향 없음

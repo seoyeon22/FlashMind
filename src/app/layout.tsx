@@ -5,6 +5,9 @@ import AuthListener from "@/components/AuthListener";
 
 export const metadata: Metadata = {
   title: "FlashMind",
+  icons: {
+    icon: "/favicon.svg",
+  },
 }
 
 export default function RootLayout({
@@ -14,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body>
+      <body className="bg-background">
         <AuthListener/>
         <Navigation/>
         {children}

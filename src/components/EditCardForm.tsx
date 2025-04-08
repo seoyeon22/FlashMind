@@ -55,9 +55,9 @@ export default function EditCardForm({ card, userId, onUpdate, onDelete }: EditC
     };
 
     return (
-        <div className="p-2 shadow-md rounded-lg">
+        <div className="bg-white p-2 shadow-md rounded-lg">
             <form onSubmit={handleUpdateCard}>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 font-handwrite text-xl">
                     <label className="text-gray-700">Q.</label>
                     <input
                         className="w-full p-1 rounded-md"
@@ -67,7 +67,7 @@ export default function EditCardForm({ card, userId, onUpdate, onDelete }: EditC
                         required
                     />
                 </div>
-                <div className="flex items-center space-x-2 mt-2">
+                <div className="flex items-center space-x-2 mt-2 font-handwrite text-xl">
                     <label className="text-gray-700">A.</label>
                     <input
                         className="w-full p-1 rounded-md"
@@ -78,13 +78,13 @@ export default function EditCardForm({ card, userId, onUpdate, onDelete }: EditC
                     />
                 </div>
                 <div className="flex justify-end space-x-2 mt-3">
-                    <button type="submit" className="px-3 py-1 text-white bg-blue-500 rounded-md">
+                    <button type="submit" className="px-3 py-1 text-white bg-primary hover:bg-secondary rounded-md">
                         Save
                     </button>
                     <button 
                         type="button" 
                         onClick={handleDeleteCard} 
-                        className="px-3 py-1 text-white bg-red-500 rounded-md"
+                        className="px-3 py-1 text-white bg-muted hover:bg-secondary rounded-md"
                     >
                         Delete
                     </button>

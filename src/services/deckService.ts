@@ -18,13 +18,19 @@ export async function getDeck(deckId: string, userId: string) {
     return data;
 }
 
-export const getDecks = async(userId: string) => {
-    const { data, error } = await supabase.from("decks").select("*").eq("user_id", userId);
-    console.log(data);
+export const getDecks = async(userId: string) => {  
+    const { data, error } = await supabase
+      .from("decks")
+      .select("*")
+      .eq("user_id", userId);
+  
+    if (error) {
+      console.error("getDecks 에러:", error);
+      throw error;
+    }
 
-    if (error) throw error;
     return data;
-}
+};
 
 export const createDeck = async (userId: string, name: string) => {
     const { data, error } = await supabase.from("decks").insert([{ user_id: userId, name: name, }]).select();

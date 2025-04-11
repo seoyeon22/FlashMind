@@ -24,7 +24,7 @@ export default function CreateDeckForm({ onCreate }: { onCreate: (deck: Deck) =>
     if (!deckName || !user) return;
 
     try {
-      const newDeck = await createDeck(user, deckName);
+      const newDeck = await createDeck(user.id, deckName);
       addDeck(newDeck);
       setDeckName("");
       onCreate(newDeck);

@@ -10,17 +10,30 @@ export default function AuthListener() {
   const { setUser } = useAuthStore();
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log("Auth Event:", event);
-      if (event === "SIGNED_OUT") {
-        setUser(null);
-      } else if (session?.user) {
+    const initSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+  
+      if (session?.user) {
         const user = await authService.getUserByAuthId(session.user.id);
-        setUser(user);
+        if (user) setUser(user);
       }
-    });
-
-    return () => subscription.unsubscribe(); // 언마운트 시 해제
+    };
+  
+    initSession();
+  
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        console.log("Auth Event:", event);
+        if (event === "SIGNED_OUT") {
+          setUser(null);
+        } else if (session?.user) {
+          const user = await authService.getUserByAuthId(session.user.id);
+          if (user) setUser(user);
+        }
+      }
+    );
+  
+    return () => subscription.unsubscribe();
   }, []);
 
   return null; // UI에는 영향 없음

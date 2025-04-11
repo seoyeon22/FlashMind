@@ -22,7 +22,7 @@ export default function ClientDeckEdit({ params }: { params: Promise<{ deckId: s
      const handleDeckNameUpdate = async () => {
         if (!user) return;
         try {
-            await updateDeckName(deckId, user, deckName);
+            await updateDeckName(deckId, user.id, deckName);
         } catch (error) {
             console.error("Error updating deck name:", error);
         }
@@ -52,9 +52,9 @@ export default function ClientDeckEdit({ params }: { params: Promise<{ deckId: s
         
         const fetchDeckData = async () => {
             try {
-                const deck = await getDeck(deckId, user);
+                const deck = await getDeck(deckId, user.id);
                 setDeckName(deck.name); // 덱 이름 설정
-                const fetchedCards = await getCards(deckId, user);
+                const fetchedCards = await getCards(deckId, user.id);
                 setCards(fetchedCards);
             } catch (error) {
                 console.error("Error fetching deck:", error);
@@ -83,10 +83,10 @@ export default function ClientDeckEdit({ params }: { params: Promise<{ deckId: s
                 </button>
             </div>
             <ul>
-                <CreateCardForm deckId={deckId} userId={user} onCreate={handleCreateCard} />
+                <CreateCardForm deckId={deckId} userId={user.id} onCreate={handleCreateCard} />
                 {cards.map((card) => (
                     <li key={card.id} className="mt-3">
-                        <EditCardForm card={card} userId={user} onUpdate={handleUpdate} onDelete={handleDelete}/>
+                        <EditCardForm card={card} userId={user.id} onUpdate={handleUpdate} onDelete={handleDelete}/>
                     </li>
                 ))}
             </ul>

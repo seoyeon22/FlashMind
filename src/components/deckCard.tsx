@@ -5,7 +5,12 @@ import { deleteDeck } from "@/services/deckService"; // 덱 삭제 API 호출
 import { useAuthStore } from "@/stores/authStore";
 import { useState } from "react";
 
-export default function DeckCard({ deck, onDelete }: { deck: any, onDelete: (deckId: string) => void }) {
+interface Deck {
+  id: string;
+  name: string;
+}
+
+export default function DeckCard({ deck, onDelete }: { deck: Deck, onDelete: (deckId: string) => void }) {
     const router = useRouter();
     const { user } = useAuthStore();
     const [hovered, setHovered] = useState(false);
@@ -18,7 +23,7 @@ export default function DeckCard({ deck, onDelete }: { deck: any, onDelete: (dec
         if (!confirm("정말 삭제하시겠습니까?")) return;
 
         try {
-            await deleteDeck(deck.id, user);
+            await deleteDeck(deck.id, user.id);
             onDelete(deck.id); // 부모 컴포넌트에서 상태 업데이트
         } catch (error) {
             console.error("Error deleting deck:", error);

@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@theme {
+    --color-primary: #1e2022;       /* 텍스트, 주요 아이콘 */
+    --color-secondary: #52616a;     /* 보조 텍스트, 테두리 */
+    --color-background: #f0f5f9;    /* 전체 배경 */
+    --color-surface: #ffffff;       /* 카드 등 내부 배경 */
+    --color-hover: #e4e9ee;         /* 호버 효과 */
+    --color-muted: #a9b1b8;         /* 비활성화 요소 등 */
+    --color-accent: #2b90d9;        /* 강조 색상 (원한다면 파란 계열로) */
+    
+    --font-handwrite: 'GangwonEdu_OTFBoldA', sans-serif;
+}
+
+.perspective {
+    perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+    transform-style: preserve-3d;
+}
+
+.backface-hidden {
+    backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+    transform: rotateY(180deg);
+}

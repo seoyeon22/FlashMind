@@ -16,7 +16,7 @@ interface Card {
 export default function ClientDeckEdit({ params }: { params: Promise<{ deckId: string }> }) {
     const { user } = useAuthStore(); // Zustand에서 userId 가져오기
     const [deckName, setDeckName] = useState("");
-    const [cards, setCards] = useState<any[]>([]);
+    const [cards, setCards] = useState<Card[]>([]);
 
      // 덱 이름 업데이트
      const handleDeckNameUpdate = async () => {

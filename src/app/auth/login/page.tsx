@@ -19,7 +19,7 @@ export default function LogIn() {
     try {
       const email = formData.get('email') as string;
       const password = formData.get('password') as string;
-      const { userId, error } = await authService.signIn(email, password);
+      const { error } = await authService.signIn(email, password);
 
       if(error) {
         setErrorMessage(error.message);
@@ -28,7 +28,7 @@ export default function LogIn() {
         router.push("/dashboard");
       }
     } catch (e) {
-      throw new Error("로그인 오류");
+      console.error("loggin error:", e);
     }
   };
 

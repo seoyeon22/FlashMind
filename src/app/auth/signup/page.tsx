@@ -8,7 +8,7 @@ async function handleSignUp(formData: FormData) {
   const password = formData.get("password") as string;
   
   try {
-      const { userId, error } = await authService.signUp(email, password);
+      const { error } = await authService.signUp(email, password);
 
       if (error) {
           console.error("Sign-up error:", error);
@@ -17,7 +17,7 @@ async function handleSignUp(formData: FormData) {
 
       redirect("/dashboard"); // 서버에서 직접 리다이렉트
   } catch (error) {
-      console.error("Unexpected error:", error);
+      console.error("signup error:", error);
   }
 }
 

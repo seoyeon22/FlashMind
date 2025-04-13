@@ -1,27 +1,37 @@
+"use client";
+
 import { authService } from "@/services/authService";
-import { redirect } from "next/navigation";
-
-async function handleSignUp(formData: FormData) {
-  "use server"; // 서버 액션 활성화
-
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
-  
-  try {
-      const { error } = await authService.signUp(email, password);
-
-      if (error) {
-          console.error("Sign-up error:", error);
-          return;
-      }
-
-      redirect("/dashboard"); // 서버에서 직접 리다이렉트
-  } catch (error) {
-      console.error("signup error:", error);
-  }
-}
+import { useAuthStore } from "@/stores/authStore";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function SignUp(){
+
+  const router = useRouter();
+  const { errorMessage, setErrorMessage } = useAuthStore();
+  
+  useEffect(() => {
+      setErrorMessage(null);
+    }, []);
+  
+    const handleSignUp = async (formData: FormData) => {
+      setErrorMessage(null);
+      
+      try {
+        const email = formData.get('email') as string;
+        const password = formData.get('password') as string;
+        const { error } = await authService.signUp(email, password);
+  
+        if(error) {
+          setErrorMessage(error.message);
+        }
+        else{
+          router.push("/dashboard");
+        }
+      } catch (e) {
+        console.error("signup error:", e);
+      }
+  };
     return (
       <div className="flex justify-center items-center h-screen">
         <form className="bg-white p-6 rounded-lg shadow-md w-96 flex flex-col gap-4">
@@ -52,7 +62,7 @@ export default function SignUp(){
               className="border border-gray-300 rounded-md p-2 focus:ring-1 focus:ring-blue-500 w-full"
             />
           </div>
-
+          {errorMessage && <p className="text-red-500">{errorMessage}</p>}
           {/* 회원가입 버튼 */}
           <button
             formAction={handleSignUp}

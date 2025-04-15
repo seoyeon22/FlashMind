@@ -81,7 +81,7 @@ export default function StudyPage({ params }: { params: Promise<{ deckId: string
   if (cards.length === 0) return <p className="text-center mt-10">카드가 없습니다.</p>;
 
   return (
-    <div className="p-4 max-w-xl mx-auto">
+    <div className="p-4 max-w-xl h-[24rem] mx-auto">
       {/* 진행률 바 */}
       <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden mb-4">
         <div
@@ -93,7 +93,7 @@ export default function StudyPage({ params }: { params: Promise<{ deckId: string
       {/* 학습 카드 */}
       {!isFinished ? (
         <div
-          className="relative w-full h-64 perspective cursor-pointer"
+          className="relative w-full h-full perspective cursor-pointer"
           onClick={handleFlip}
         >
           <div
@@ -102,34 +102,36 @@ export default function StudyPage({ params }: { params: Promise<{ deckId: string
             }`}
           >
             {/* 앞면 */}
-            <div className="absolute inset-0 flex items-center justify-center backface-hidden bg-white text-[#1e2022] text-2xl rounded-lg font-handwrite">
+            <div className="absolute inset-0 flex items-center justify-center backface-hidden bg-white text-[#1e2022] text-2xl rounded-lg font-handwrite p-4 overflow-auto">
               {studyCards[0]?.question}
             </div>
             {/* 뒷면 */}
-            <div className="absolute inset-0 rotate-y-180 flex flex-col items-center justify-center backface-hidden bg-[#1e2022] text-white rounded-lg p-4 gap-4">
-              <p className="text-2xl font-handwrite">{studyCards[0]?.answer}</p>
-              <div className="flex gap-4">
-                <button
-                  className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleCorrect();
-                  }}
-                >
-                  정답
-                </button>
-                <button
-                  className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleIncorrect();
-                  }}
-                >
-                  오답
-                </button>
-              </div>
+            <div className="absolute rotate-y-180 flex flex-col items-center inset-0 backface-hidden bg-[#1e2022] text-white rounded-lg p-4 gap-4 overflow-auto text-wrap">
+              <p className="text-2xl font-handwrite h-full content-center text-center">{studyCards[0]?.answer}</p>
             </div>
           </div>
+          {flipped && (
+            <div className="flex justify-center gap-4 mt-4">
+              <button
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCorrect();
+                }}
+              >
+                정답
+              </button>
+              <button
+                className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleIncorrect();
+                }}
+              >
+                오답
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         // 완료 화면

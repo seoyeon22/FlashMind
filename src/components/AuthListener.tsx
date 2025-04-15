@@ -24,17 +24,17 @@ export default function AuthListener() {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        console.log("Auth Event:", event);
+        // console.log("Auth Event:", event);
 
         if (event === 'SIGNED_IN' && session?.user) {
           // SIGNED_IN 이벤트 후, 잠시 기다렸다가 다시 세션에서 유저 정보 불러오기
           setTimeout(async () => {
             const user = await authService.getUserByAuthId(session.user.id);
             if (user) {
-              console.log("User after SIGNED_IN:", user);
+              // console.log("User after SIGNED_IN:", user);
               setUser(user);  // 유저 정보 설정
             } else {
-              console.log("No user found after SIGNED_IN event");
+              // console.log("No user found after SIGNED_IN event");
             }
           }, 500);  // 500ms 대기 후 세션 처리
         }

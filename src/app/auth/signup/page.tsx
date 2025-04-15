@@ -34,7 +34,7 @@ export default function SignUp(){
   };
     return (
       <div className="flex justify-center items-center h-screen">
-        <form className="bg-white p-6 rounded-lg shadow-md w-96 flex flex-col gap-4">
+        <form className="bg-white m-6 p-6 rounded-lg shadow-md w-96 flex flex-col gap-4">
           {/* 이메일 */}
           <div className="flex flex-col">
             <label htmlFor="email" className="text-gray-700 font-medium mb-1">

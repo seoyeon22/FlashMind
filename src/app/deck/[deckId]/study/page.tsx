@@ -23,8 +23,6 @@ export default function StudyPage({ params }: { params: Promise<{ deckId: string
     resetStudy
   } = useStudyStore();
 
-  const [flipped, setFlipped] = useState(false);
-
   useEffect(() => {
     if (!user) return;
 
@@ -32,7 +30,6 @@ export default function StudyPage({ params }: { params: Promise<{ deckId: string
       try {
         const fetchedCards = await getCards(deckId, user.id);
         setCards(deckId, fetchedCards); // Zustand 상태로 설정
-        setFlipped(false);
       } catch (error) {
         console.error("Error fetching cards:", error);
       }

@@ -46,7 +46,7 @@ export const useStudyStore = create<StudyState>()(
                 }
             },
             markCorrect: () => {
-                const [_, ...rest] = get().studyCards;
+                const rest = get().studyCards.slice(1);
                 set({
                     studyCards: rest,
                     isFinished: rest.length === 0,

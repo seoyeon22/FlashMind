@@ -71,15 +71,13 @@ export default function Navigation() {
         </div>
       </div>
 
-      
-
       {/* 슬라이드 메뉴 - 모바일에서만 */}
       <div
         className={`fixed top-0 right-0 h-full w-64 bg-white shadow-md z-40 transform transition-transform duration-300 ease-in-out md:hidden ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-col p-6 space-y-4 mt-20">
+        <div className="flex flex-col p-6 space-y-4 mt-15">
           {user ? (
             <button
               className="bg-[#52616a] text-white px-4 py-2 rounded-xl"

@@ -73,11 +73,11 @@ export default function ClientDeckEdit({ params }: { params: Promise<{ deckId: s
                     type="text"
                     value={deckName}
                     onChange={(e) => setDeckName(e.target.value)}
-                    className="rounded-md p-1 text-2xl font-semibold font-handwrite flex-1"
+                    className="text-primary dark:text-dark-primary rounded-md p-1 text-2xl font-semibold font-handwrite flex-1"
                 />
                 <button
                     onClick={handleDeckNameUpdate}
-                    className="bg-primary text-white px-2 py-1 rounded-md"
+                    className="bg-accent dark:bg-dark-accent text-white px-2 py-1 rounded-md"
                 >
                 Save
                 </button>

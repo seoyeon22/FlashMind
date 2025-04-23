@@ -10,7 +10,11 @@ interface Deck {
   name: string;
 }
 
-export default function CreateDeckForm({ onCreate }: { onCreate: (deck: Deck) => void }) {
+export default function CreateDeckForm({
+  onCreate,
+}: {
+  onCreate: (deck: Deck) => void;
+}) {
   const { user } = useAuthStore();
   const { addDeck } = useDeckStore();
   const [deckName, setDeckName] = useState("");
@@ -40,20 +44,22 @@ export default function CreateDeckForm({ onCreate }: { onCreate: (deck: Deck) =>
       onMouseLeave={() => setHovered(false)}
     >
       <div
-        className={`relative w-full h-full transition-transform duration-500 transform-style-preserve-3d rounded-xl shadow-md ${hovered ? "rotate-y-180" : ""}`}
+        className={`relative w-full h-full transition-transform duration-500 transform-style-preserve-3d rounded-xl shadow-md ${
+          hovered ? "rotate-y-180" : ""
+        }`}
       >
         {/* 앞면 */}
-        <div className="absolute inset-0 bg-surface rounded-xl backface-hidden flex items-center justify-center text-primary text-2xl font-medium">
+        <div className="absolute inset-0 bg-surface dark:bg-dark-surface text-primary dark:text-dark-primary rounded-xl backface-hidden flex items-center justify-center text-2xl font-medium">
           +
         </div>
 
         {/* 뒷면 */}
         <form
           onSubmit={handleCreateDeck}
-          className="absolute inset-0 bg-surface rounded-xl rotate-y-180 backface-hidden flex flex-col items-center justify-center gap-2 px-4"
+          className="absolute inset-0 bg-surface dark:bg-dark-surface rounded-xl rotate-y-180 backface-hidden flex flex-col items-center justify-center gap-2 px-4"
         >
           <input
-            className="w-full px-3 py-1 rounded-md text-sm text-primary placeholder:text-[#999] bg-background"
+            className="w-full px-3 py-1 rounded-md text-sm text-primary dark:text-dark-primary placeholder:text-muted dark:placeholder:text-dark-muted bg-background dark:bg-dark-background border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-accent"
             name="deckName"
             type="text"
             placeholder="덱 이름 입력"
@@ -63,7 +69,7 @@ export default function CreateDeckForm({ onCreate }: { onCreate: (deck: Deck) =>
           />
           <button
             type="submit"
-            className="bg-secondary text-white px-3 py-1 rounded-md hover:bg-[#3f4d58] w-full"
+            className="bg-accent text-white px-3 py-1 rounded-md hover:bg-accent-hover transition w-full"
           >
             생성하기
           </button>

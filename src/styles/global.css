@@ -1,119 +1,170 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
-    font-family: 'GangwonEdu_OTFBoldA';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'GangwonEdu_OTFBoldA';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @theme {
-    --color-primary: #1e2022;       /* 텍스트, 주요 아이콘 */
-    --color-secondary: #52616a;     /* 보조 텍스트, 테두리 */
-    --color-background: #f0f5f9;    /* 전체 배경 */
-    --color-surface: #ffffff;       /* 카드 등 내부 배경 */
-    --color-hover: #e4e9ee;         /* 호버 효과 */
-    --color-muted: #a9b1b8;         /* 비활성화 요소 등 */
-    --color-accent: #2b90d9;        /* 강조 색상 (원한다면 파란 계열로) */
-    
-    --font-handwrite: 'GangwonEdu_OTFBoldA', sans-serif;
+  --color-primary: #1e293b;
+  --color-secondary: #64748b;
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-hover: #e2e8f0;
+  --color-muted: #cbd5e1;
+  --color-accent: #3b82f6;
+  --color-highlight: #f59e0b;
+  --color-green: #10b981;
+
+  --color-dark-primary: #f1f5f9;
+  --color-dark-secondary: #94a3b8;
+  --color-dark-background: #0f172a;
+  --color-dark-surface: #1e293b;
+  --color-dark-hover: #334155;
+  --color-dark-muted: #475569;
+  --color-dark-accent: #60a5fa;
+  --color-dark-highlight: #facc15;
+  --color-dark-green: #34d399;
+
+  --font-handwrite: 'GangwonEdu_OTFBoldA', sans-serif;
 }
 
 ::-webkit-scrollbar {
-  display: none; /* 스크롤바 숨기기 */
+  display: none;
+  /* 스크롤바 숨기기 */
 }
 
 .perspective {
-    perspective: 1000px;
+  perspective: 1000px;
 }
 
 .transform-style-preserve-3d {
-    transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
 .backface-hidden {
-    backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .rotate-y-180 {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 .menu-trigger {
-    margin: 8px;
+  margin: 8px;
 }
 
-  .menu-trigger,
-  .menu-trigger span {
-    transition: all .4s;
-    box-sizing: border-box;
-  }
-  
-  .menu-trigger {
-    position: relative;
-    width: 32px;
-    height: 28px;
-  }
-  
-  .menu-trigger span {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background-color: #1e2022;
-    border-radius: 4px;
-  }
-  
-  .menu-trigger span:nth-of-type(1) {
-    top: 0;
-  }
-  
-  .menu-trigger span:nth-of-type(2) {
-    top: 12px;
-  }
-  
-  .menu-trigger span:nth-of-type(3) {
-    bottom: 0;
-  }
-  
-  /* 기본 애니메이션 */
+.menu-trigger,
+.menu-trigger span {
+  transition: all .4s;
+  box-sizing: border-box;
+}
+
+.menu-trigger {
+  position: relative;
+  width: 32px;
+  height: 28px;
+}
+
+.menu-trigger span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+}
+
 .menu-trigger span:nth-of-type(1) {
-    animation: menu-bar-01 0.75s forwards;
+  top: 0;
 }
+
+.menu-trigger span:nth-of-type(2) {
+  top: 12px;
+}
+
 .menu-trigger span:nth-of-type(3) {
-    animation: menu-bar-02 0.75s forwards;
+  bottom: 0;
 }
-  
-  @keyframes menu-bar-01 {
-    0% { transform: translateY(12px) rotate(45deg); }
-    50% { transform: translateY(12px) rotate(0); }
-    100% { transform: translateY(0) rotate(0); }
+
+/* 기본 애니메이션 */
+.menu-trigger span:nth-of-type(1) {
+  animation: menu-bar-01 0.75s forwards;
+}
+
+.menu-trigger span:nth-of-type(3) {
+  animation: menu-bar-02 0.75s forwards;
+}
+
+@keyframes menu-bar-01 {
+  0% {
+    transform: translateY(12px) rotate(45deg);
   }
-  @keyframes menu-bar-02 {
-    0% { transform: translateY(-12px) rotate(-45deg); }
-    50% { transform: translateY(-12px) rotate(0); }
-    100% { transform: translateY(0) rotate(0); }
+
+  50% {
+    transform: translateY(12px) rotate(0);
   }
-  
-  /* 활성화 상태 */
-  .menu-trigger.active span:nth-of-type(1) {
-    animation: active-menu-bar-01 0.75s forwards;
+
+  100% {
+    transform: translateY(0) rotate(0);
   }
-  .menu-trigger.active span:nth-of-type(2) {
-    opacity: 0;
-    transition: opacity 0.25s 0.25s;
+}
+
+@keyframes menu-bar-02 {
+  0% {
+    transform: translateY(-12px) rotate(-45deg);
   }
-  .menu-trigger.active span:nth-of-type(3) {
-    animation: active-menu-bar-02 0.75s forwards;
+
+  50% {
+    transform: translateY(-12px) rotate(0);
   }
-  
-  @keyframes active-menu-bar-01 {
-    0% { transform: translateY(0) rotate(0); }
-    50% { transform: translateY(12px) rotate(0); }
-    100% { transform: translateY(12px) rotate(45deg); }
+
+  100% {
+    transform: translateY(0) rotate(0);
   }
-  @keyframes active-menu-bar-02 {
-    0% { transform: translateY(0) rotate(0); }
-    50% { transform: translateY(-12px) rotate(0); }
-    100% { transform: translateY(-12px) rotate(-45deg); }
+}
+
+/* 활성화 상태 */
+.menu-trigger.active span:nth-of-type(1) {
+  animation: active-menu-bar-01 0.75s forwards;
+}
+
+.menu-trigger.active span:nth-of-type(2) {
+  opacity: 0;
+  transition: opacity 0.25s 0.25s;
+}
+
+.menu-trigger.active span:nth-of-type(3) {
+  animation: active-menu-bar-02 0.75s forwards;
+}
+
+@keyframes active-menu-bar-01 {
+  0% {
+    transform: translateY(0) rotate(0);
   }
+
+  50% {
+    transform: translateY(12px) rotate(0);
+  }
+
+  100% {
+    transform: translateY(12px) rotate(45deg);
+  }
+}
+
+@keyframes active-menu-bar-02 {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(0);
+  }
+
+  100% {
+    transform: translateY(-12px) rotate(-45deg);
+  }
+}

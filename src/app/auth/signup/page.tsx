@@ -33,7 +33,7 @@ export default function SignUp(){
       }
   };
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-full">
         <form className="bg-white m-6 p-6 rounded-lg shadow-md w-96 flex flex-col gap-4">
           {/* 이메일 */}
           <div className="flex flex-col">
@@ -67,7 +67,7 @@ export default function SignUp(){
           <button
             formAction={handleSignUp}
             type="submit"
-            className="bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors w-full"
+            className="bg-accent text-white py-2 rounded-md hover:brightness-110 transition-colors w-full"
           >
             Sign up
           </button>

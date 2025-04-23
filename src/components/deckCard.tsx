@@ -30,40 +30,44 @@ export default function DeckCard({ deck, onDelete }: { deck: Deck, onDelete: (de
         }
     };
 
-    return (
+    return  (
+      <div
+        className="perspective w-full h-48"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
         <div
-      className="perspective w-full h-48"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <div className={`relative w-full h-full transition-transform duration-500 transform-style-preserve-3d rounded-xl shadow-md ${hovered ? "rotate-y-180" : ""}`}>
-        {/* 앞면 */}
-        <div className="absolute inset-0 bg-surface rounded-xl backface-hidden flex items-center justify-center text-[#1e2022] text-3xl font-bold font-handwrite">
-          {deck.name}
-        </div>
-
-        {/* 뒷면 */}
-        <div className="absolute inset-0 bg-surface rounded-xl rotate-y-180 backface-hidden flex flex-col items-center justify-center gap-2">
-          <button
-            onClick={() => router.push(`/deck/${deck.id}/study`)}
-            className="px-4 py-1 bg-[#52616a] text-white rounded hover:bg-[#3f4d58]"
-          >
-            학습
-          </button>
-          <button
-            onClick={() => router.push(`/deck/${deck.id}/edit`)}
-            className="px-4 py-1 bg-[#f0f5f9] text-[#1e2022] rounded hover:bg-[#e2e8ec]"
-          >
-            편집
-          </button>
-          <button
-            onClick={handleDeleteDeck}
-            className="px-4 py-1 bg-[#cccccc] text-[#1e2022] rounded hover:bg-[#b4b4b4]"
-          >
-            삭제
-          </button>
+          className={`relative w-full h-full transition-transform duration-500 transform-style-preserve-3d rounded-xl shadow-md ${
+            hovered ? "rotate-y-180" : ""
+          }`}
+        >
+          {/* 앞면 */}
+          <div className="absolute inset-0 bg-surface dark:bg-dark-surface text-primary dark:text-dark-primary rounded-xl backface-hidden flex items-center justify-center text-3xl font-bold font-handwrite">
+            {deck.name}
+          </div>
+  
+          {/* 뒷면 */}
+          <div className="absolute inset-0 bg-surface dark:bg-dark-surface rounded-xl rotate-y-180 backface-hidden flex flex-col items-center justify-center gap-2">
+            <button
+              onClick={() => router.push(`/deck/${deck.id}/study`)}
+              className="px-4 py-1 rounded bg-green text-white hover:brightness-110 transition"
+            >
+              학습
+            </button>
+            <button
+              onClick={() => router.push(`/deck/${deck.id}/edit`)}
+              className="px-4 py-1 rounded bg-accent text-white hover:brightness-110 transition dark:bg-dark-accent dark:text-dark-primary dark:hover:bg-dark-accent"
+            >
+              편집
+            </button>
+            <button
+              onClick={handleDeleteDeck}
+              className="px-4 py-1 rounded bg-secondary text-white hover:brightness-110 transition"
+            >
+              삭제
+            </button>
+          </div>
         </div>
       </div>
-    </div>
     );
 }

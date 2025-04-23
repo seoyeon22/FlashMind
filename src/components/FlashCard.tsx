@@ -25,11 +25,14 @@ export default function FlashCard({ card, onCorrect, onIncorrect }: FlashCardPro
         }`}
       >
         {/* 앞면 */}
-        <div className="absolute inset-0 flex items-center justify-center backface-hidden bg-white text-[#1e2022] text-2xl rounded-lg font-handwrite p-4 overflow-auto">
+        <div className="absolute inset-0 flex flex-col items-center justify-center backface-hidden bg-surface dark:bg-dark-surface text-primary dark:text-dark-primary text-2xl rounded-lg font-handwrite p-4 overflow-auto">
+          <span className="absolute top-2 left-3 text-sm text-muted font-sans font-semibold">Q.</span>
           {card.question}
         </div>
+
         {/* 뒷면 */}
-        <div className="absolute rotate-y-180 flex flex-col items-center inset-0 backface-hidden bg-[#1e2022] text-white rounded-lg p-4 gap-4 overflow-auto text-wrap">
+        <div className="absolute rotate-y-180 flex flex-col items-center inset-0 backface-hidden bg-surface dark:bg-dark-surface text-primary dark:text-dark-primary rounded-lg p-4 gap-4 overflow-auto text-wrap">
+          <span className="absolute top-2 left-3 text-md text-muted font-sans font-semibold">A.</span>
           <p className="text-2xl font-handwrite h-full content-center text-center">{card.answer}</p>
         </div>
       </div>
@@ -37,7 +40,7 @@ export default function FlashCard({ card, onCorrect, onIncorrect }: FlashCardPro
       {flipped && (
         <div className="flex justify-center gap-4 mt-4">
           <button
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            className="bg-accent dark:bg-dark-accent text-white px-4 py-2 rounded hover:brightness-110 dark:hover:brightness-90"
             onClick={(e) => {
               e.stopPropagation();
               onCorrect();
@@ -47,7 +50,7 @@ export default function FlashCard({ card, onCorrect, onIncorrect }: FlashCardPro
             정답
           </button>
           <button
-            className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+            className="bg-highlight dark:bg-dark-highlight text-white px-4 py-2 rounded hover:brightness-110 dark:hover:brightness-90"
             onClick={(e) => {
               e.stopPropagation();
               onIncorrect();

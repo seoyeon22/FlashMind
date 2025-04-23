@@ -41,10 +41,10 @@ export default function CreateCardForm({ deckId, userId, onCreate }: CreateCardF
     };
 
     return (
-        <div className="bg-white p-2 border border-dashed shadow-md rounded-md">
+        <div className="bg-surface dark:bg-dark-surface text-primary dark:text-dark-primary p-2 border border-dashed shadow-md rounded-md">
             <form onSubmit={handleCreateCard}>
                 <div className="flex items-center space-x-2 font-handwrite text-xl">
-                    <label className="text-gray-700">Q.</label>
+                    <label className="text-muted">Q.</label>
                     <input
                         className="w-full p-1 rounded-md"
                         type="text"
@@ -55,7 +55,7 @@ export default function CreateCardForm({ deckId, userId, onCreate }: CreateCardF
                     />
                 </div>
                 <div className="flex items-center space-x-2 mt-2 font-handwrite text-xl">
-                    <label className="text-gray-700">A.</label>
+                    <label className="text-muted">A.</label>
                     <input
                         className="w-full p-1 rounded-md"
                         type="text"
@@ -68,7 +68,7 @@ export default function CreateCardForm({ deckId, userId, onCreate }: CreateCardF
                 <div className="flex justify-end mt-3">
                     <button 
                         type="submit" 
-                        className="px-3 py-1 bg-primary text-white rounded-md"
+                        className="px-3 py-1 bg-green dark:bg-dark-green text-white rounded-md"
                     >
                         Create Card
                     </button>

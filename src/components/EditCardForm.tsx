@@ -55,10 +55,10 @@ export default function EditCardForm({ card, userId, onUpdate, onDelete }: EditC
     };
 
     return (
-        <div className="bg-white p-2 shadow-md rounded-lg">
+        <div className="bg-surface dark:bg-dark-surface text-primary dark:text-dark-primary p-2 shadow-md rounded-lg">
             <form onSubmit={handleUpdateCard}>
                 <div className="flex items-center space-x-2 font-handwrite text-xl">
-                    <label className="text-gray-700">Q.</label>
+                    <label className="text-muted">Q.</label>
                     <input
                         className="w-full p-1 rounded-md"
                         type="text"
@@ -68,7 +68,7 @@ export default function EditCardForm({ card, userId, onUpdate, onDelete }: EditC
                     />
                 </div>
                 <div className="flex items-center space-x-2 mt-2 font-handwrite text-xl">
-                    <label className="text-gray-700">A.</label>
+                    <label className="text-muted">A.</label>
                     <input
                         className="w-full p-1 rounded-md"
                         type="text"
@@ -78,13 +78,13 @@ export default function EditCardForm({ card, userId, onUpdate, onDelete }: EditC
                     />
                 </div>
                 <div className="flex justify-end space-x-2 mt-3">
-                    <button type="submit" className="px-3 py-1 text-white bg-primary hover:bg-secondary rounded-md">
+                    <button type="submit" className="px-3 py-1 text-white bg-accent dark:bg-dark-accent hover:brightness-110 rounded-md">
                         Save
                     </button>
                     <button 
                         type="button" 
                         onClick={handleDeleteCard} 
-                        className="px-3 py-1 text-white bg-muted hover:bg-secondary rounded-md"
+                        className="px-3 py-1 text-white bg-muted dark:bg-dark-muted hover:brightness-110 rounded-md"
                     >
                         Delete
                     </button>
